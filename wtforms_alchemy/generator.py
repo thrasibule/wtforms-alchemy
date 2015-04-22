@@ -318,8 +318,11 @@ class FormGenerator(object):
 
         :param column: SQLAlchemy Column object
         """
-        if column.default and is_scalar(column.default.arg):
-            return column.default.arg
+        if column.default:
+            if column.default.is_scalar:
+                return column.default.arg
+            else:
+                return column.default.arg(ctx=None)
         else:
             if not column.nullable:
                 return self.meta.default
