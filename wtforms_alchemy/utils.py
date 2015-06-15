@@ -34,19 +34,8 @@ def strip_string(value):
     return value
 
 
-def is_scalar(value):
-    return isinstance(value, (type(None), six.text_type, int, float, bool))
-
-
 def null_or_unicode(value):
     return six.text_type(value) or None
-
-
-def null_or_int(value):
-    try:
-        return int(value)
-    except TypeError:
-        return None
 
 
 def flatten(list_):

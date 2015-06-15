@@ -31,8 +31,6 @@ from .generator import FormGenerator
 from .utils import (
     ClassMap,
     is_date_column,
-    is_scalar,
-    null_or_int,
     null_or_unicode
 )
 
@@ -49,8 +47,6 @@ __all__ = (
     Unique,
     UnknownTypeException,
     is_date_column,
-    is_scalar,
-    null_or_int,
     null_or_unicode,
 )
 
