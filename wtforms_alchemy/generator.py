@@ -59,7 +59,6 @@ from .utils import (
     is_date_column,
     is_number,
     is_number_range,
-    is_scalar,
     null_or_unicode,
     strip_string,
     translated_attributes
@@ -321,7 +320,7 @@ class FormGenerator(object):
         if column.default:
             if column.default.is_scalar:
                 return column.default.arg
-            else:
+            elif column.default.is_callable:
                 return column.default.arg(ctx=None)
         else:
             if not column.nullable:
