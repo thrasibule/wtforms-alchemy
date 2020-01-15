@@ -2,6 +2,7 @@ import inspect
 from collections import OrderedDict
 from decimal import Decimal
 from enum import Enum
+from functools import partial
 
 import six
 import sqlalchemy as sa
@@ -315,8 +316,11 @@ class FormGenerator(object):
 
         :param column: SQLAlchemy Column object
         """
-        if column.default and is_scalar(column.default.arg):
-            return column.default.arg
+        if column.default:
+            if is_scalar(column.default.arg):
+                return column.default.arg
+            elif callable(column.default.arg):
+                return partial(column.default.arg, ctx=None)
         else:
             if not column.nullable:
                 return self.meta.default
